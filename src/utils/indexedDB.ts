@@ -40,3 +40,10 @@ export const getTodos = async (): Promise<Todo[]> => {
     };
   });
 };
+
+export const deleteTodo = async (id: string): Promise<void> => {
+  const db = await initDB();
+  const transaction = db.transaction('todos', 'readwrite');
+  const store = transaction.objectStore('todos');
+  store.delete(id);
+};
