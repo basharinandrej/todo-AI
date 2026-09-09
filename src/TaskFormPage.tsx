@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import type { Todo } from '../store/todoStore';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import type { Todo } from '../store/types';
 
 interface TaskFormPageProps {
   addTodo: (todo: Omit<Todo, 'completed'>) => void;
@@ -18,15 +17,18 @@ export default function TaskFormPage({ addTodo }: TaskFormPageProps) {
   };
 
   return (
-    <div className="container mt-4">
-      <h1>Add New Task</h1>
+    <div className="card">
+      <h2>Add New Task</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="taskInput" className="form-label">Task Description</label>
+        <div className="form-group">
+          <label htmlFor="taskInput" className="form-label">
+            Task Description
+          </label>
           <input
             type="text"
-            className="form-control"
+            className="form-input"
             id="taskInput"
+            placeholder="What needs to be done?"
             value={taskText}
             onChange={(e) => setTaskText(e.target.value)}
           />
