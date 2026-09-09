@@ -1,4 +1,4 @@
-import type { Todo } from '../store/todoStore';
+import type { Todo } from '../store/types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface TaskListPageProps {
@@ -18,12 +18,22 @@ export default function TaskListPage({
       <ul className="list-group">
         {todos.map((todo) => (
           <li key={todo.id} className="list-group-item d-flex justify-content-between align-items-center">
-            <span
-              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-              onClick={() => toggleTodo(todo.id)}
-            >
-              {todo.text}
-            </span>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => toggleTodo(todo.id)}
+                id={`todo-checkbox-${todo.id}`}
+              />
+              <label
+                className="form-check-label"
+                htmlFor={`todo-checkbox-${todo.id}`}
+                style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+              >
+                {todo.text}
+              </label>
+            </div>
             <button onClick={() => removeTodo(todo.id)} className="btn btn-danger btn-sm">
               Remove
             </button>

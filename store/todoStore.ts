@@ -1,32 +1,27 @@
 // todoStore.ts
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { TodoStore } from './types';
 
-export type Todo = {
-  id: string;
-  text: string;
-  completed: boolean;
-};
 
-type TodoStore = {
-  todos: Todo[];
-  addTodo: (todo: Omit<Todo, 'completed'>) => void;
-  removeTodo: (id: string) => void;
-  toggleTodo: (id: string) => void;
-};
-
-const useTodoStore = create<TodoStore>((set) => ({
-  todos: [],
-  addTodo: (todo) => set((state) => ({
-    todos: [...state.todos, { ...todo, completed: false }]
-  })),
-  removeTodo: (id) => set((state) => ({
-    todos: state.todos.filter(todo => todo.id !== id)
-  })),
-  toggleTodo: (id) => set((state) => ({
-    todos: state.todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    )
-  }))
-}));
+const useTodoStore = create<TodoStore>()(
+  devtools(
+    (set) => ({
+      todos: [],
+      addTodo: (todo) => set((state) => ({
+        todos: [...state.todos, { ...todo, completed: false }]
+      }), false, 'todo/addTodo'),
+      removeTodo: (id) => set((state) => ({
+        todos: state.todos.filter(todo => todo.id !== id)
+      }), false, 'todo/removeTodo'),
+      toggleTodo: (id) => set((state) => ({
+        todos: state.todos.map(todo =>
+          todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        )
+      }), false, 'todo/toggleTodo')
+    }),
+    { name: 'TodoStore' }
+  )
+);
 
 export default useTodoStore;
