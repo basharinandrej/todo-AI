@@ -2,6 +2,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { TodoStore } from './types';
+import { getTodos, saveTodo } from '../src/utils/indexedDB';
 
 
 const useTodoStore = create<TodoStore>()(
