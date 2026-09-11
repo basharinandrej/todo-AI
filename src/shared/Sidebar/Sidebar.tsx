@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import type { Priority } from '../../../store/types';
 import { CATEGORIES, PRIORITIES } from '../../../store/types';
 import Button from '../Button/Button';

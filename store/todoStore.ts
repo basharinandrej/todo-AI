@@ -2,7 +2,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { TodoStore } from './types';
-import { getTodos, saveTodo, deleteTodo } from '../src/utils/indexedDB';
+import { getTodos, saveTodo } from '../src/utils/indexedDB';
 
 const useTodoStore = create<TodoStore>()(
   devtools(
@@ -20,7 +20,7 @@ const useTodoStore = create<TodoStore>()(
       addTodo: (todo) =>
         set(
           (state) => {
-            const newTodo = { ...todo, completed: false };
+            const newTodo = { ...todo, completed: false, isDeleted: false };
             saveTodo(newTodo);
             return { todos: [...state.todos, newTodo] };
           },
@@ -28,14 +28,20 @@ const useTodoStore = create<TodoStore>()(
           'todo/addTodo',
         ),
 
-      removeTodo: (id) =>
+      softDeleteTodo: (id) =>
         set(
           (state) => {
-            deleteTodo(id);
-            return { todos: state.todos.filter((todo) => todo.id !== id) };
+            const updatedTodos = state.todos.map((todo) =>
+              todo.id === id ? { ...todo, isDeleted: true } : todo,
+            );
+            const updatedTodo = updatedTodos.find((t) => t.id === id);
+            if (updatedTodo) {
+              saveTodo(updatedTodo);
+            }
+            return { todos: updatedTodos };
           },
           false,
-          'todo/removeTodo',
+          'todo/softDeleteTodo',
         ),
 
       toggleTodo: (id) =>

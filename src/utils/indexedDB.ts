@@ -4,7 +4,7 @@ import type { Todo } from '../../store/types';
 
 export const initDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open('TodoDB', 3);
+    const request = indexedDB.open('TodoDB', 4);
 
     request.onerror = () => {
       reject(new Error('Failed to open IndexedDB'));
@@ -19,7 +19,7 @@ export const initDB = (): Promise<IDBDatabase> => {
       if (!db.objectStoreNames.contains('todos')) {
         db.createObjectStore('todos', { keyPath: 'id' });
       }
-      // Migration: ensure all existing todos have a priority field
+      // Migration: ensure all existing todos have priority and isDeleted fields
       const transaction = (event.target as IDBOpenDBRequest).transaction;
       if (transaction) {
         const store = transaction.objectStore('todos');
@@ -30,8 +30,11 @@ export const initDB = (): Promise<IDBDatabase> => {
             const todo = cursor.value;
             if (!todo.priority) {
               todo.priority = 'medium';
-              cursor.update(todo);
             }
+            if (todo.isDeleted === undefined) {
+              todo.isDeleted = false;
+            }
+            cursor.update(todo);
             cursor.continue();
           }
         };

@@ -7,7 +7,7 @@ import RadioGroup from './shared/RadioGroup';
 import Button from './shared/Button/Button';
 
 interface TaskFormPageProps {
-  addTodo: (todo: Omit<Todo, 'completed'>) => void;
+  addTodo: (todo: Omit<Todo, 'completed' | 'isDeleted'>) => void;
 }
 
 export default function TaskFormPage({ addTodo }: TaskFormPageProps) {

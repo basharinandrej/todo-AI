@@ -16,6 +16,7 @@ export interface Todo {
   id: string;
   text: string;
   completed: boolean;
+  isDeleted: boolean;
   categoryId: string;
   priority: Priority;
 }
@@ -34,8 +35,8 @@ export interface TodoStore {
   priorityFilter: Priority | null;
   completedFilter: boolean | null;
   loadTodos: () => Promise<void>;
-  addTodo: (todo: Omit<Todo, 'completed'>) => void;
-  removeTodo: (id: string) => void;
+  addTodo: (todo: Omit<Todo, 'completed' | 'isDeleted'>) => void;
+  softDeleteTodo: (id: string) => void;
   toggleTodo: (id: string) => void;
   updateTodoPriority: (id: string, priority: Priority) => void;
   setCategoryFilter: (categoryId: string | null) => void;
