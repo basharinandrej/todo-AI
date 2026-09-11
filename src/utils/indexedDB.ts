@@ -4,7 +4,7 @@ import type { Todo } from '../../store/types';
 
 export const initDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open('TodoDB', 1);
+    const request = indexedDB.open('TodoDB', 2);
 
     request.onerror = () => {
       reject(new Error('Failed to open IndexedDB'));

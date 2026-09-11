@@ -74,3 +74,7 @@ TODO/
 3. `TaskListPage.tsx` renders the todo list, with checkbox toggling and remove buttons
 4. All mutations (add, toggle, remove) are persisted to IndexedDB immediately
 5. Zustand devtools middleware enables time-travel debugging in Redux DevTools
+
+## Rules for AI Agents
+
+- **Do NOT create temporary helper scripts** (e.g. `.py`, `.js`, `.sh` files) to work around tool limitations. Modify source files directly using `write_to_file` or `replace_in_file`. If file content gets truncated, use a simpler approach — split into multiple `replace_in_file` calls or remove backticks from the content by using string concatenation (`'class' + (cond ? ' selected' : '')` instead of template literals).

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Todo } from '../store/types';
+import { CATEGORIES } from '../store/types';
 import Form from './shared/Form';
 import Input from './shared/Input';
 import Button from './shared/Button';
@@ -10,11 +11,12 @@ interface TaskFormPageProps {
 
 export default function TaskFormPage({ addTodo }: TaskFormPageProps) {
   const [taskText, setTaskText] = useState('');
+  const [categoryId, setCategoryId] = useState(CATEGORIES[0].id);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (taskText.trim()) {
-      addTodo({ id: Date.now().toString(), text: taskText });
+      addTodo({ id: Date.now().toString(), text: taskText, categoryId });
       setTaskText('');
     }
   };
@@ -31,6 +33,30 @@ export default function TaskFormPage({ addTodo }: TaskFormPageProps) {
           value={taskText}
           onChange={(e) => setTaskText(e.target.value)}
         />
+        <div className="form-group">
+          <label className="form-label">Category</label>
+          <div className="category-select-wrapper">
+            {CATEGORIES.map((cat) => (
+              <label
+                key={cat.id}
+                className={'category-option' + (categoryId === cat.id ? ' selected' : '')}
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value={cat.id}
+                  checked={categoryId === cat.id}
+                  onChange={(e) => setCategoryId(e.target.value)}
+                />
+                <span
+                  className="category-dot"
+                  style={{ backgroundColor: cat.color }}
+                />
+                {cat.name}
+              </label>
+            ))}
+          </div>
+        </div>
         <Button type="submit">Add Task</Button>
       </Form>
     </div>
