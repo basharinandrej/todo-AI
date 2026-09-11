@@ -37,6 +37,8 @@ export interface TodoStore {
   loadTodos: () => Promise<void>;
   addTodo: (todo: Omit<Todo, 'completed' | 'isDeleted'>) => void;
   softDeleteTodo: (id: string) => void;
+  restoreTodo: (id: string) => void;
+  hardDeleteTodo: (id: string) => void;
   toggleTodo: (id: string) => void;
   updateTodoPriority: (id: string, priority: Priority) => void;
   setCategoryFilter: (categoryId: string | null) => void;

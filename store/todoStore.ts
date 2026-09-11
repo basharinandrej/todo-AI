@@ -44,6 +44,34 @@ const useTodoStore = create<TodoStore>()(
           'todo/softDeleteTodo',
         ),
 
+      restoreTodo: (id) =>
+        set(
+          (state) => {
+            const updatedTodos = state.todos.map((todo) =>
+              todo.id === id ? { ...todo, isDeleted: false } : todo,
+            );
+            const updatedTodo = updatedTodos.find((t) => t.id === id);
+            if (updatedTodo) {
+              saveTodo(updatedTodo);
+            }
+            return { todos: updatedTodos };
+          },
+          false,
+          'todo/restoreTodo',
+        ),
+
+      hardDeleteTodo: (id) =>
+        set(
+          (state) => {
+            import('../src/utils/indexedDB').then(({ deleteTodo }) => {
+              deleteTodo(id);
+            });
+            return { todos: state.todos.filter((todo) => todo.id !== id) };
+          },
+          false,
+          'todo/hardDeleteTodo',
+        ),
+
       toggleTodo: (id) =>
         set(
           (state) => {
