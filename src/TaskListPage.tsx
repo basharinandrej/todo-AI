@@ -1,6 +1,10 @@
 import type { Priority, Todo } from '../store/types';
 import { CATEGORIES, PRIORITIES } from '../store/types';
 import Button from './shared/Button';
+import CategoryBadge from './shared/CategoryBadge';
+import Checkbox from './shared/Checkbox';
+import Select from './shared/Select';
+import EmptyState from './shared/EmptyState';
 
 interface TaskListPageProps {
   todos: Todo[];
@@ -13,6 +17,8 @@ function getCategory(todo: Todo) {
   return CATEGORIES.find((c) => c.id === todo.categoryId);
 }
 
+const PRIORITY_OPTIONS = PRIORITIES.map((p) => ({ value: p.id, label: p.name }));
+
 export default function TaskListPage({
   todos,
   toggleTodo,
@@ -20,12 +26,7 @@ export default function TaskListPage({
   updateTodoPriority,
 }: TaskListPageProps) {
   if (todos.length === 0) {
-    return (
-      <div className="empty-state">
-        <div className="icon">📋</div>
-        <p>No tasks yet. Add one above!</p>
-      </div>
-    );
+    return <EmptyState message="No tasks yet. Add one above!" />;
   }
 
   return (
@@ -33,41 +34,19 @@ export default function TaskListPage({
       {todos.map((todo) => {
         const category = getCategory(todo);
         return (
-          <li
-            key={todo.id}
-            className={'todo-item' + (todo.completed ? ' completed' : '')}
-          >
-            <label className="checkbox-wrapper">
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => toggleTodo(todo.id)}
-              />
-            </label>
+          <li key={todo.id} className={'todo-item' + (todo.completed ? ' completed' : '')}>
+            <Checkbox checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+            />
             <span className="todo-text">{todo.text}</span>
-            {category && (
-              <span
-                className="category-badge"
-                style={{ backgroundColor: category.color }}
-              >
-                {category.name}
-              </span>
-            )}
-            <select
+            {category && <CategoryBadge name={category.name} color={category.color} />}
+            <Select
               className="priority-select"
+              options={PRIORITY_OPTIONS}
               value={todo.priority}
               onChange={(e) => updateTodoPriority(todo.id, e.target.value as Priority)}
-            >
-              {PRIORITIES.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name}
-                </option>
-              ))}
-            </select>
-            <Button
-              variant="danger"
-              onClick={() => removeTodo(todo.id)}
-            >
+            />
+            <Button variant="danger" onClick={() => removeTodo(todo.id)}>
               Remove
             </Button>
           </li>

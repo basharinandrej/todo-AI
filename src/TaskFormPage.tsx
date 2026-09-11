@@ -3,6 +3,7 @@ import type { Priority, Todo } from '../store/types';
 import { CATEGORIES, PRIORITIES } from '../store/types';
 import Form from './shared/Form';
 import Input from './shared/Input';
+import RadioGroup from './shared/RadioGroup';
 import Button from './shared/Button';
 
 interface TaskFormPageProps {
@@ -34,54 +35,20 @@ export default function TaskFormPage({ addTodo }: TaskFormPageProps) {
           value={taskText}
           onChange={(e) => setTaskText(e.target.value)}
         />
-        <div className="form-group">
-          <label className="form-label">Category</label>
-          <div className="category-select-wrapper">
-            {CATEGORIES.map((cat) => (
-              <label
-                key={cat.id}
-                className={'category-option' + (categoryId === cat.id ? ' selected' : '')}
-              >
-                <input
-                  type="radio"
-                  name="category"
-                  value={cat.id}
-                  checked={categoryId === cat.id}
-                  onChange={(e) => setCategoryId(e.target.value)}
-                />
-                <span
-                  className="category-dot"
-                  style={{ backgroundColor: cat.color }}
-                />
-                {cat.name}
-              </label>
-            ))}
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="form-label">Priority</label>
-          <div className="category-select-wrapper">
-            {PRIORITIES.map((p) => (
-              <label
-                key={p.id}
-                className={'category-option' + (priority === p.id ? ' selected' : '')}
-              >
-                <input
-                  type="radio"
-                  name="priority"
-                  value={p.id}
-                  checked={priority === p.id}
-                  onChange={(e) => setPriority(e.target.value as Priority)}
-                />
-                <span
-                  className="category-dot"
-                  style={{ backgroundColor: p.color }}
-                />
-                {p.name}
-              </label>
-            ))}
-          </div>
-        </div>
+        <RadioGroup
+          label="Category"
+          name="category"
+          options={CATEGORIES}
+          value={categoryId}
+          onChange={setCategoryId}
+        />
+        <RadioGroup
+          label="Priority"
+          name="priority"
+          options={PRIORITIES}
+          value={priority}
+          onChange={(value) => setPriority(value as Priority)}
+        />
         <Button type="submit">Add Task</Button>
       </Form>
     </div>
