@@ -4,11 +4,12 @@ import TaskListPage from './TaskListPage';
 import TaskFormPage from './TaskFormPage';
 import CategoryFilter from './shared/CategoryFilter';
 import PriorityFilter from './shared/PriorityFilter';
+import StatusFilter from './shared/StatusFilter';
 import Button from './shared/Button/Button';
 import './App.css';
 
 function App() {
-  const { todos, categoryFilter, priorityFilter, loadTodos, addTodo, toggleTodo, removeTodo, updateTodoPriority, setCategoryFilter, setPriorityFilter, resetFilters } = useTodoStore();
+  const { todos, categoryFilter, priorityFilter, completedFilter, loadTodos, addTodo, toggleTodo, removeTodo, updateTodoPriority, setCategoryFilter, setPriorityFilter, setCompletedFilter, resetFilters } = useTodoStore();
 
   useEffect(() => {
     loadTodos();
@@ -22,8 +23,11 @@ function App() {
     if (priorityFilter) {
       result = result.filter((t) => t.priority === priorityFilter);
     }
+    if (completedFilter !== null) {
+      result = result.filter((t) => t.completed === completedFilter);
+    }
     return result;
-  }, [todos, categoryFilter, priorityFilter]);
+  }, [todos, categoryFilter, priorityFilter, completedFilter]);
 
   const completedCount = filteredTodos.filter((t) => t.completed).length;
   const totalCount = filteredTodos.length;
@@ -50,7 +54,8 @@ function App() {
           </h2>
           <CategoryFilter selected={categoryFilter} onChange={setCategoryFilter} />
           <PriorityFilter selected={priorityFilter} onChange={setPriorityFilter} />
-          {(categoryFilter || priorityFilter) && (
+          <StatusFilter selected={completedFilter} onChange={setCompletedFilter} />
+          {(categoryFilter || priorityFilter || completedFilter !== null) && (
             <div className="reset-filter-wrapper">
               <Button variant="outline-secondary" onClick={resetFilters}>
                 Reset filters

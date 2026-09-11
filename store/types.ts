@@ -32,6 +32,7 @@ export interface TodoStore {
   todos: Todo[];
   categoryFilter: string | null;
   priorityFilter: Priority | null;
+  completedFilter: boolean | null;
   loadTodos: () => Promise<void>;
   addTodo: (todo: Omit<Todo, 'completed'>) => void;
   removeTodo: (id: string) => void;
@@ -39,5 +40,6 @@ export interface TodoStore {
   updateTodoPriority: (id: string, priority: Priority) => void;
   setCategoryFilter: (categoryId: string | null) => void;
   setPriorityFilter: (priority: Priority | null) => void;
+  setCompletedFilter: (completed: boolean | null) => void;
   resetFilters: () => void;
 }
