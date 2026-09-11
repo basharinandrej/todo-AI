@@ -326,37 +326,6 @@ body {
   white-space: nowrap;
 }
 
-/* Priority Select */
-.priority-select {
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-family: var(--sans);
-  border: 2px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--bg-input);
-  color: var(--text-primary);
-  cursor: pointer;
-  outline: none;
-  transition: border-color var(--transition);
-}
-
-.priority-select:focus {
-  border-color: var(--border-focus);
-}
-
-.priority-select option[value="high"] {
-  color: #f5576c;
-}
-
-.priority-select option[value="medium"] {
-  color: #f5a623;
-}
-
-.priority-select option[value="low"] {
-  color: #4facfe;
-}
-
 /* Category Filter */
 .category-filter {
   display: flex;

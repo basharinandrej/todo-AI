@@ -1,4 +1,5 @@
 import type { SelectHTMLAttributes } from 'react';
+import './Select.css';
 
 interface SelectOption {
   value: string;

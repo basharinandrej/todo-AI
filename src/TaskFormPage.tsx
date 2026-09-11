@@ -4,7 +4,7 @@ import { CATEGORIES, PRIORITIES } from '../store/types';
 import Form from './shared/Form';
 import Input from './shared/Input';
 import RadioGroup from './shared/RadioGroup';
-import Button from './shared/Button';
+import Button from './shared/Button/Button';
 
 interface TaskFormPageProps {
   addTodo: (todo: Omit<Todo, 'completed'>) => void;

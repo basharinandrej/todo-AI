@@ -1,9 +1,9 @@
 import type { Priority, Todo } from '../store/types';
 import { CATEGORIES, PRIORITIES } from '../store/types';
-import Button from './shared/Button';
+import Button from './shared/Button/Button';
 import CategoryBadge from './shared/CategoryBadge';
 import Checkbox from './shared/Checkbox';
-import Select from './shared/Select';
+import Select from './shared/Select/Select';
 import EmptyState from './shared/EmptyState';
 
 interface TaskListPageProps {
