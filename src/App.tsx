@@ -3,19 +3,26 @@ import useTodoStore from '../store/todoStore';
 import TaskListPage from './TaskListPage';
 import TaskFormPage from './TaskFormPage';
 import CategoryFilter from './shared/CategoryFilter';
+import PriorityFilter from './shared/PriorityFilter';
 import './App.css';
 
 function App() {
-  const { todos, categoryFilter, loadTodos, addTodo, toggleTodo, removeTodo, updateTodoPriority, setCategoryFilter } = useTodoStore();
+  const { todos, categoryFilter, priorityFilter, loadTodos, addTodo, toggleTodo, removeTodo, updateTodoPriority, setCategoryFilter, setPriorityFilter } = useTodoStore();
 
   useEffect(() => {
     loadTodos();
   }, [loadTodos]);
 
-  const filteredTodos = useMemo(
-    () => (categoryFilter ? todos.filter((t) => t.categoryId === categoryFilter) : todos),
-    [todos, categoryFilter],
-  );
+  const filteredTodos = useMemo(() => {
+    let result = todos;
+    if (categoryFilter) {
+      result = result.filter((t) => t.categoryId === categoryFilter);
+    }
+    if (priorityFilter) {
+      result = result.filter((t) => t.priority === priorityFilter);
+    }
+    return result;
+  }, [todos, categoryFilter, priorityFilter]);
 
   const completedCount = filteredTodos.filter((t) => t.completed).length;
   const totalCount = filteredTodos.length;
@@ -41,6 +48,7 @@ function App() {
             <span className="task-count">{totalCount}</span>
           </h2>
           <CategoryFilter selected={categoryFilter} onChange={setCategoryFilter} />
+          <PriorityFilter selected={priorityFilter} onChange={setPriorityFilter} />
           <TaskListPage todos={filteredTodos} toggleTodo={toggleTodo} removeTodo={removeTodo} updateTodoPriority={updateTodoPriority} />
         </div>
       )}

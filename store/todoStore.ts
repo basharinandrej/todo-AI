@@ -9,6 +9,7 @@ const useTodoStore = create<TodoStore>()(
     (set) => ({
       todos: [],
       categoryFilter: null,
+      priorityFilter: null,
 
       loadTodos: async () => {
         const todos = await getTodos();
@@ -70,6 +71,9 @@ const useTodoStore = create<TodoStore>()(
 
       setCategoryFilter: (categoryId) =>
         set({ categoryFilter: categoryId }, false, 'todo/setCategoryFilter'),
+
+      setPriorityFilter: (priority) =>
+        set({ priorityFilter: priority }, false, 'todo/setPriorityFilter'),
     }),
     { name: 'TodoStore' },
   ),
