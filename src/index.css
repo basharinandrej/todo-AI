@@ -404,6 +404,37 @@ body {
   color: #4facfe;
 }
 
+/* Category Filter */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-chip {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--sans);
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+  line-height: 1;
+}
+
+.filter-chip:hover {
+  border-color: var(--border-focus);
+  color: var(--border-focus);
+}
+
+.filter-chip.active {
+  color: #fff;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .app-container {

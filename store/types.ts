@@ -30,9 +30,11 @@ export const CATEGORIES: Category[] = [
 
 export interface TodoStore {
   todos: Todo[];
+  categoryFilter: string | null;
   loadTodos: () => Promise<void>;
   addTodo: (todo: Omit<Todo, 'completed'>) => void;
   removeTodo: (id: string) => void;
   toggleTodo: (id: string) => void;
   updateTodoPriority: (id: string, priority: Priority) => void;
+  setCategoryFilter: (categoryId: string | null) => void;
 }
