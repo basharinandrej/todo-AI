@@ -2,10 +2,7 @@ import { useEffect, useMemo } from 'react';
 import useTodoStore from '../store/todoStore';
 import TaskListPage from './TaskListPage';
 import TaskFormPage from './TaskFormPage';
-import CategoryFilter from './shared/CategoryFilter';
-import PriorityFilter from './shared/PriorityFilter';
-import StatusFilter from './shared/StatusFilter';
-import Button from './shared/Button/Button';
+import FilterBar from './shared/FilterBar/FilterBar';
 import './App.css';
 
 function App() {
@@ -52,16 +49,15 @@ function App() {
             Your Tasks
             <span className="task-count">{totalCount}</span>
           </h2>
-          <CategoryFilter selected={categoryFilter} onChange={setCategoryFilter} />
-          <PriorityFilter selected={priorityFilter} onChange={setPriorityFilter} />
-          <StatusFilter selected={completedFilter} onChange={setCompletedFilter} />
-          {(categoryFilter || priorityFilter || completedFilter !== null) && (
-            <div className="reset-filter-wrapper">
-              <Button variant="outline-secondary" onClick={resetFilters}>
-                Reset filters
-              </Button>
-            </div>
-          )}
+          <FilterBar
+            categoryFilter={categoryFilter}
+            priorityFilter={priorityFilter}
+            completedFilter={completedFilter}
+            onCategoryChange={setCategoryFilter}
+            onPriorityChange={setPriorityFilter}
+            onStatusChange={setCompletedFilter}
+            onReset={resetFilters}
+          />
           <TaskListPage todos={filteredTodos} toggleTodo={toggleTodo} removeTodo={removeTodo} updateTodoPriority={updateTodoPriority} />
         </div>
       )}

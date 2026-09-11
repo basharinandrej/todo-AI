@@ -1,0 +1,64 @@
+.filter-bar {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  border: 1px solid #eef0f4;
+}
+
+.filter-bar__row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-bar__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.filter-bar__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8e94a0;
+}
+
+.filter-bar__chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background: #f4f5f8;
+  border: 2px solid transparent;
+  color: #5a5f6b;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.filter-chip:hover {
+  background: #e8ebf0;
+  color: #333;
+}
+
+.filter-chip.active {
+  color: #fff;
+  border-color: transparent;
+}
+
+.filter-bar__reset {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #eef0f4;
+}
