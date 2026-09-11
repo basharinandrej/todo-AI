@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "homepage": "https://basharinandrej.github.io/todo-AI",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.102.8",
