@@ -78,3 +78,4 @@ TODO/
 ## Rules for AI Agents
 
 - **Do NOT create temporary helper scripts** (e.g. `.py`, `.js`, `.sh` files) to work around tool limitations. Modify source files directly using `write_to_file` or `replace_in_file`. If file content gets truncated, use a simpler approach — split into multiple `replace_in_file` calls or remove backticks from the content by using string concatenation (`'class' + (cond ? ' selected' : '')` instead of template literals).
+- **Extract reusable small components into `src/shared/`.** Any small, reusable UI component such as `<select>` dropdowns, category/priority pickers, tab selectors, etc. must be extracted into a separate component file in `src/shared/` (e.g. `src/shared/Select.tsx`, `src/shared/CategoryPicker.tsx`). This keeps page components clean and promotes component reuse.

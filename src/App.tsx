@@ -5,7 +5,7 @@ import TaskFormPage from './TaskFormPage';
 import './App.css';
 
 function App() {
-  const { todos, loadTodos, addTodo, toggleTodo, removeTodo } = useTodoStore();
+  const { todos, loadTodos, addTodo, toggleTodo, removeTodo, updateTodoPriority } = useTodoStore();
 
   useEffect(() => {
     loadTodos();
@@ -33,7 +33,7 @@ function App() {
             Your Tasks
             <span className="task-count">{totalCount}</span>
           </h2>
-          <TaskListPage todos={todos} toggleTodo={toggleTodo} removeTodo={removeTodo} />
+          <TaskListPage todos={todos} toggleTodo={toggleTodo} removeTodo={removeTodo} updateTodoPriority={updateTodoPriority} />
         </div>
       )}
     </div>

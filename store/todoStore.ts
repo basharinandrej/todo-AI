@@ -50,6 +50,22 @@ const useTodoStore = create<TodoStore>()(
           false,
           'todo/toggleTodo',
         ),
+
+      updateTodoPriority: (id, priority) =>
+        set(
+          (state) => {
+            const updatedTodos = state.todos.map((todo) =>
+              todo.id === id ? { ...todo, priority } : todo,
+            );
+            const updatedTodo = updatedTodos.find((t) => t.id === id);
+            if (updatedTodo) {
+              saveTodo(updatedTodo);
+            }
+            return { todos: updatedTodos };
+          },
+          false,
+          'todo/updateTodoPriority',
+        ),
     }),
     { name: 'TodoStore' },
   ),

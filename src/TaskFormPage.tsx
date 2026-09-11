@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import type { Todo } from '../store/types';
-import { CATEGORIES } from '../store/types';
+import type { Priority, Todo } from '../store/types';
+import { CATEGORIES, PRIORITIES } from '../store/types';
 import Form from './shared/Form';
 import Input from './shared/Input';
 import Button from './shared/Button';
@@ -12,11 +12,12 @@ interface TaskFormPageProps {
 export default function TaskFormPage({ addTodo }: TaskFormPageProps) {
   const [taskText, setTaskText] = useState('');
   const [categoryId, setCategoryId] = useState(CATEGORIES[0].id);
+  const [priority, setPriority] = useState<Priority>('medium');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (taskText.trim()) {
-      addTodo({ id: Date.now().toString(), text: taskText, categoryId });
+      addTodo({ id: Date.now().toString(), text: taskText, categoryId, priority });
       setTaskText('');
     }
   };
@@ -53,6 +54,30 @@ export default function TaskFormPage({ addTodo }: TaskFormPageProps) {
                   style={{ backgroundColor: cat.color }}
                 />
                 {cat.name}
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="form-label">Priority</label>
+          <div className="category-select-wrapper">
+            {PRIORITIES.map((p) => (
+              <label
+                key={p.id}
+                className={'category-option' + (priority === p.id ? ' selected' : '')}
+              >
+                <input
+                  type="radio"
+                  name="priority"
+                  value={p.id}
+                  checked={priority === p.id}
+                  onChange={(e) => setPriority(e.target.value as Priority)}
+                />
+                <span
+                  className="category-dot"
+                  style={{ backgroundColor: p.color }}
+                />
+                {p.name}
               </label>
             ))}
           </div>

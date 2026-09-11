@@ -4,11 +4,20 @@ export interface Category {
   color: string;
 }
 
+export type Priority = 'high' | 'medium' | 'low';
+
+export const PRIORITIES: { id: Priority; name: string; color: string }[] = [
+  { id: 'high', name: 'High', color: '#f5576c' },
+  { id: 'medium', name: 'Medium', color: '#f5a623' },
+  { id: 'low', name: 'Low', color: '#4facfe' },
+];
+
 export interface Todo {
   id: string;
   text: string;
   completed: boolean;
   categoryId: string;
+  priority: Priority;
 }
 
 export const CATEGORIES: Category[] = [
@@ -25,4 +34,5 @@ export interface TodoStore {
   addTodo: (todo: Omit<Todo, 'completed'>) => void;
   removeTodo: (id: string) => void;
   toggleTodo: (id: string) => void;
+  updateTodoPriority: (id: string, priority: Priority) => void;
 }
