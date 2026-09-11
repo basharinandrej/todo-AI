@@ -1,3 +1,4 @@
+
 // Utility module for IndexedDB operations
 import type { Todo } from '../../store/types';
 
@@ -13,7 +14,7 @@ export const initDB = (): Promise<IDBDatabase> => {
       resolve(request.result);
     };
 
-    request.onupgradeneeded = (event) => {
+    request.onupgradeneeded = (_event) => {
       const db = request.result;
       if (!db.objectStoreNames.contains('todos')) {
         db.createObjectStore('todos', { keyPath: 'id' });

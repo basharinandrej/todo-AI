@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "store/*": ["store/*"]
     }
-  }
+  },
+  "include": ["store"]
 }

@@ -1,7 +1,7 @@
 // todoStore.ts
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { TodoStore } from './types';
+import type { TodoStore } from './types';
 import { getTodos, saveTodo, deleteTodo } from '../src/utils/indexedDB';
 
 const useTodoStore = create<TodoStore>()(
