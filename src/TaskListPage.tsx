@@ -1,4 +1,5 @@
 import type { Todo } from '../store/types';
+import Button from './shared/Button';
 
 interface TaskListPageProps {
   todos: Todo[];
@@ -35,12 +36,12 @@ export default function TaskListPage({
             />
           </label>
           <span className="todo-text">{todo.text}</span>
-          <button
+          <Button
+            variant="danger"
             onClick={() => removeTodo(todo.id)}
-            className="btn btn-danger"
           >
             Remove
-          </button>
+          </Button>
         </li>
       ))}
     </ul>

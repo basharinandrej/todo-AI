@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import type { Todo } from '../store/types';
+import Form from './shared/Form';
+import Input from './shared/Input';
+import Button from './shared/Button';
 
 interface TaskFormPageProps {
   addTodo: (todo: Omit<Todo, 'completed'>) => void;
@@ -19,24 +22,17 @@ export default function TaskFormPage({ addTodo }: TaskFormPageProps) {
   return (
     <div className="card">
       <h2>Add New Task</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="taskInput" className="form-label">
-            Task Description
-          </label>
-          <input
-            type="text"
-            className="form-input"
-            id="taskInput"
-            placeholder="What needs to be done?"
-            value={taskText}
-            onChange={(e) => setTaskText(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Add Task
-        </button>
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <Input
+          id="taskInput"
+          label="Task Description"
+          type="text"
+          placeholder="What needs to be done?"
+          value={taskText}
+          onChange={(e) => setTaskText(e.target.value)}
+        />
+        <Button type="submit">Add Task</Button>
+      </Form>
     </div>
   );
 }
