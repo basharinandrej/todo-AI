@@ -39,4 +39,5 @@ export interface TodoStore {
   updateTodoPriority: (id: string, priority: Priority) => void;
   setCategoryFilter: (categoryId: string | null) => void;
   setPriorityFilter: (priority: Priority | null) => void;
+  resetFilters: () => void;
 }

@@ -11,6 +11,7 @@ export default function CategoryFilter({ selected, onChange }: CategoryFilterPro
       <button
         type="button"
         className={'filter-chip' + (selected === null ? ' active' : '')}
+        style={selected === null ? { backgroundColor: '#667eea', borderColor: '#667eea' } : undefined}
         onClick={() => onChange(null)}
       >
         All

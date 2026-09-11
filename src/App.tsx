@@ -4,10 +4,11 @@ import TaskListPage from './TaskListPage';
 import TaskFormPage from './TaskFormPage';
 import CategoryFilter from './shared/CategoryFilter';
 import PriorityFilter from './shared/PriorityFilter';
+import Button from './shared/Button/Button';
 import './App.css';
 
 function App() {
-  const { todos, categoryFilter, priorityFilter, loadTodos, addTodo, toggleTodo, removeTodo, updateTodoPriority, setCategoryFilter, setPriorityFilter } = useTodoStore();
+  const { todos, categoryFilter, priorityFilter, loadTodos, addTodo, toggleTodo, removeTodo, updateTodoPriority, setCategoryFilter, setPriorityFilter, resetFilters } = useTodoStore();
 
   useEffect(() => {
     loadTodos();
@@ -49,6 +50,13 @@ function App() {
           </h2>
           <CategoryFilter selected={categoryFilter} onChange={setCategoryFilter} />
           <PriorityFilter selected={priorityFilter} onChange={setPriorityFilter} />
+          {(categoryFilter || priorityFilter) && (
+            <div className="reset-filter-wrapper">
+              <Button variant="outline-secondary" onClick={resetFilters}>
+                Reset filters
+              </Button>
+            </div>
+          )}
           <TaskListPage todos={filteredTodos} toggleTodo={toggleTodo} removeTodo={removeTodo} updateTodoPriority={updateTodoPriority} />
         </div>
       )}

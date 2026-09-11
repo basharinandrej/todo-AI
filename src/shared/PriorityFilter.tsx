@@ -12,6 +12,7 @@ export default function PriorityFilter({ selected, onChange }: PriorityFilterPro
       <button
         type="button"
         className={'filter-chip' + (selected === null ? ' active' : '')}
+        style={selected === null ? { backgroundColor: '#667eea', borderColor: '#667eea' } : undefined}
         onClick={() => onChange(null)}
       >
         All

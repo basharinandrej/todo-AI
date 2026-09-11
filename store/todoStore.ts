@@ -74,6 +74,9 @@ const useTodoStore = create<TodoStore>()(
 
       setPriorityFilter: (priority) =>
         set({ priorityFilter: priority }, false, 'todo/setPriorityFilter'),
+
+      resetFilters: () =>
+        set({ categoryFilter: null, priorityFilter: null }, false, 'todo/resetFilters'),
     }),
     { name: 'TodoStore' },
   ),

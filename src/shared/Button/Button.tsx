@@ -3,7 +3,7 @@ import './Button.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  variant?: 'primary' | 'danger';
+  variant?: 'primary' | 'danger' | 'outline-secondary';
 }
 
 export default function Button({
@@ -12,7 +12,12 @@ export default function Button({
   className = '',
   ...props
 }: ButtonProps) {
-  const variantClass = variant === 'danger' ? 'btn btn-danger' : 'btn btn-primary';
+  const variantMap: Record<string, string> = {
+    primary: 'btn btn-primary',
+    danger: 'btn btn-danger',
+    'outline-secondary': 'btn btn-outline-secondary btn-sm',
+  };
+  const variantClass = variantMap[variant] || variantMap.primary;
 
   return (
     <button className={`${variantClass} ${className}`.trim()} {...props}>
