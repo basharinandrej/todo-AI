@@ -1,0 +1,68 @@
+.sidebar {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  border: 1px solid var(--border);
+}
+
+.sidebar__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.sidebar__section {
+  margin-bottom: 20px;
+}
+
+.sidebar__section:last-of-type {
+  margin-bottom: 0;
+}
+
+.sidebar__label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.sidebar__chips {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar__chip {
+  background: var(--bg-input);
+  border: 2px solid transparent;
+  color: var(--text-secondary);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-weight: 500;
+  text-align: left;
+  font-family: var(--sans);
+}
+
+.sidebar__chip:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.sidebar__chip.active {
+  color: #fff;
+  border-color: transparent;
+}
+
+.sidebar__reset {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
